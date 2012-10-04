@@ -1,0 +1,16 @@
+a.out
+.*.sw[op]
+.sw[op]
+*~
+*-demo.c
+*-demo.cl
+*.o
+print-devices
+transpose
+transpose-soln
+hello-mpi
+*-soln
+mpi-hello
+a
+mpi-neighbor
+mpi-send
