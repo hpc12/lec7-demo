@@ -11,6 +11,8 @@ __kernel void sum(__global float *a, long n)
 
   a_loc[lid] = v;
 
+  printf("lid=%d\n", lid);
+
   barrier(CLK_LOCAL_MEM_FENCE);
 
   if (gid < n)
