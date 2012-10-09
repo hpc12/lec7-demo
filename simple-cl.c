@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     abort();
   }
 
-  const long n = atol(argv[1]);
+  const cl_long n = atol(argv[1]);
 
   cl_context ctx;
   cl_command_queue queue;
