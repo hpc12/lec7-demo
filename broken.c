@@ -24,15 +24,15 @@ void add_to_tree(struct tree_node **root, value_type v)
 {
   if (*root = NULL)
   {
-    if (v < (*root)->entry)
-      add_to_tree(&((*root)->left), v);
-    else
-      add_to_tree(&((*root)->left), v);
+    *root = (struct tree_node *) malloc(sizeof(struct tree_node));
+    init_node(*root, v);
   }
   else
   {
-    *root = (struct tree_node *) malloc(sizeof(struct tree_node));
-    init_node(*root, v);
+    if (v < (*root)->entry)
+      add_to_tree(&((*root)->left), v);
+    else
+      add_to_tree(&((*root)->right), v);
   }
 }
 
