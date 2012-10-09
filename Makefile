@@ -7,13 +7,13 @@ EXECUTABLES = broken \
 all: $(EXECUTABLES)
 
 broken: broken.c
-	gcc -std=gnu99 -g -lrt -o$@ $^
+	gcc $(DEBUG_FLAGS) -std=gnu99 -lrt -o$@ $^
 
 mpi%: mpi%.c
 	mpicc -std=gnu99 -lrt -o$@ $^
 
 %.o : %.c %.h
-	mpicc -c $(CL_CFLAGS) -std=gnu99 $<
+	mpicc -c -std=gnu99 $<
 
 clean:
 	rm -f $(EXECUTABLES) *.o
