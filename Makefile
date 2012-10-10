@@ -3,6 +3,7 @@ EXECUTABLES = broken \
 	      mpi-send-soln mpi-2send-soln \
 	      mpi-nonblock-soln mpi-neighbor \
 	      mpi-periodic-send2-soln \
+	      mpi-bandwidth mpi-bi-bandwidth mpi-latency \
 	      simple-cl
 
 all: $(EXECUTABLES)

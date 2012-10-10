@@ -17,3 +17,6 @@ mpi-send
 broken
 core
 simple-cl
+mpi-bandwidth
+mpi-bi-bandwidth
+mpi-latency
