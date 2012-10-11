@@ -1,15 +1,13 @@
-EXECUTABLES = broken \
-	      mpi-hello mpi-hello-soln \
-	      mpi-send-soln mpi-2send-soln \
-	      mpi-nonblock-soln mpi-neighbor \
+EXECUTABLES = \
+	      mpi-hello \
 	      mpi-periodic-send2-soln \
 	      mpi-bandwidth mpi-bi-bandwidth mpi-latency \
-	      simple-cl
+	      sorted-faster
 
 all: $(EXECUTABLES)
 
-broken: broken.c
-	gcc $(DEBUG_FLAGS) -fopenmp -std=gnu99 -lrt -o$@ $^
+sorted-faster: sorted-faster.cpp
+	g++ $(DEBUG_FLAGS) -lrt -o$@ $^
 
 mpi%: mpi%.c
 	mpicc -std=gnu99 $(DEBUG_FLAGS) -lrt -o$@ $^
@@ -22,16 +20,3 @@ mpe%: mpi%.c
 
 clean:
 	rm -f $(EXECUTABLES) *.o mpe-*
-
-# OpenCL business -------------------------------------------------------------
-
-ifdef OPENCL_INC
-  CL_CFLAGS = -I$(OPENCL_INC)
-endif
-
-ifdef OPENCL_LIB
-  CL_LDFLAGS = -L$(OPENCL_LIB)
-endif
-
-simple-cl: simple-cl.c cl-helper.c
-	gcc $(CL_CFLAGS) $(CL_LDFLAGS) -std=gnu99 -lrt -lOpenCL -o$@ $^

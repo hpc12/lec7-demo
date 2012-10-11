@@ -12,12 +12,9 @@ hello-mpi
 *-soln
 mpi-hello
 a
-mpi-neighbor
-mpi-send
-broken
 core
-simple-cl
 mpi-bandwidth
 mpi-bi-bandwidth
 mpi-latency
 *.clog2
+sorted-faster
