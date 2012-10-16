@@ -2,11 +2,11 @@ EXECUTABLES = \
 	      mpi-hello \
 	      mpi-periodic-send2-soln \
 	      mpi-bandwidth mpi-bi-bandwidth mpi-latency \
-	      sorted-faster
+	      branch-predictor
 
 all: $(EXECUTABLES)
 
-sorted-faster: sorted-faster.cpp
+branch-predictor: branch-predictor.cpp
 	g++ $(DEBUG_FLAGS) -lrt -o$@ $^
 
 mpi%: mpi%.c

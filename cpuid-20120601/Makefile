@@ -33,7 +33,7 @@ WEB_DIR=/toad1/apps.mine/www/www/$(PROG)
 
 BUILDROOT=
 
-default: $(PROG) $(PROG).man.gz
+default: $(PROG)
 
 $(PROG): cpuid.c Makefile
 	$(CC) $(CFL) -o $@ cpuid.c
