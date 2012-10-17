@@ -6,7 +6,7 @@ EXECUTABLES = \
 
 all: $(EXECUTABLES)
 
-branch-predictor: branch-predictor.cpp
+perf-mystery: perf-mystery.cpp
 	g++ $(DEBUG_FLAGS) -lrt -o$@ $^
 
 mpi%: mpi%.c
