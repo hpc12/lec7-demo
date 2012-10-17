@@ -17,4 +17,4 @@ mpi-bandwidth
 mpi-bi-bandwidth
 mpi-latency
 *.clog2
-sorted-faster
+perf-mystery
