@@ -2,7 +2,7 @@ EXECUTABLES = \
 	      mpi-hello \
 	      mpi-periodic-send2-soln \
 	      mpi-bandwidth mpi-bi-bandwidth mpi-latency \
-	      branch-predictor
+	      perf-mystery
 
 all: $(EXECUTABLES)
 

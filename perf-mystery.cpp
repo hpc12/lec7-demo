@@ -1,4 +1,4 @@
-// http://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-an-unsorted-array
+// scroll *way* down for source
 #include <algorithm>
 #include "timing.h"
 #include <stdio.h>
@@ -18,9 +18,9 @@ int main()
   timestamp_type start, stop;
   get_timestamp(&start);
 
-  std::sort(data, data + arraySize);
+  // std::sort(data, data + arraySize);
 
-  for (unsigned i = 0; i < 100000; ++i)
+  for (unsigned i = 0; i < 10000; ++i)
   {
     // primary loop
     for (unsigned c = 0; c < arraySize; ++c)
@@ -35,3 +35,58 @@ int main()
   printf("sum: %lld\n", sum);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// http://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-an-unsorted-array
