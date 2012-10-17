@@ -28,18 +28,23 @@ BOOST_PYTHON_MODULE(module)
 
 def measure_strides():
     FUNC_CODE = """
-    void go(unsigned count, unsigned stride)
+    int go(unsigned count, unsigned stride)
     {
-      const unsigned arr_size = 64 * 1024 * 1024;
-      int *ary = (int *) malloc(sizeof(int) * arr_size);
+      const unsigned array_size = 64 * 1024 * 1024;
+      int *ary = (int *) malloc(sizeof(int) * array_size);
 
       for (unsigned it = 0; it < count; ++it)
       {
-        for (unsigned i = 0; i < arr_size; i += stride)
+        for (unsigned i = 0; i < array_size; i += stride)
           ary[i] *= 17;
       }
 
+      int result = 0;
+      for (unsigned i = 0; i < array_size; ++i)
+          result += ary[i];
+
       free(ary);
+      return result;
     }
     """
     from codepy.jit import extension_from_string
@@ -48,7 +53,7 @@ def measure_strides():
     strides = []
     times = []
 
-    count = 10
+    count = 30
     for stride in [2**i for i in range(0, 11)]:
         start = time()
         cmod.go(count, stride)
@@ -76,15 +81,27 @@ def measure_strides():
 
 def measure_cache_bandwidths():
     FUNC_CODE = """
-    void go(unsigned array_size, unsigned steps)
+    int go(unsigned array_size, unsigned steps)
     {
       int *ary = (int *) malloc(sizeof(int) * array_size);
       unsigned asm1 = array_size - 1;
 
-      for (unsigned i = 0; i < steps; ++i)
-        ary[(i*16) & asm1] ++;
+      for (unsigned i = 0; i < 100*steps;)
+      {
+        #define ONE ary[(i++*16) & asm1] ++;
+        #define FIVE ONE ONE ONE ONE ONE
+        #define TEN FIVE FIVE
+        #define FIFTY TEN TEN TEN TEN TEN
+        #define HUNDRED FIFTY FIFTY
+        HUNDRED
+      }
+
+      int result = 0;
+      for (unsigned i = 0; i < array_size; ++i)
+          result += ary[i];
 
       free(ary);
+      return result;
     }
     """
     from codepy.jit import extension_from_string
@@ -93,8 +110,8 @@ def measure_cache_bandwidths():
     sizes = []
     bandwidths = []
 
-    steps = 2**26
-    for array_size in [2**i for i in range(10, 26)]:
+    steps = 2**(26-7)
+    for array_size in [2**i for i in range(10, 27)]:
         start = time()
         cmod.go(array_size, steps)
         stop = time()
@@ -102,7 +119,7 @@ def measure_cache_bandwidths():
         sizes.append(array_size*4)
         elapsed = stop-start
 
-        gb_transferred = 2*steps*4/1e9 # 2 for rw, 4 for sizeof(int)
+        gb_transferred = 2*100*steps*4/1e9 # 2 for rw, 4 for sizeof(int)
         bandwidth = gb_transferred/elapsed
 
         bandwidths.append(bandwidth)
@@ -111,7 +128,8 @@ def measure_cache_bandwidths():
 
     pt.clf()
     pt.rc("font", size=20)
-    pt.semilogx(sizes, bandwidths, "o-", basex=2)
+    pt.loglog(sizes, bandwidths, "o-", basex=2)
+    pt.loglog(sizes, 16*np.array(bandwidths), "--", basex=2)
     pt.xlabel("Array Size [Bytes]")
     pt.ylabel("Eff. Bandwidth [GB/s]")
     pt.grid()
@@ -127,7 +145,7 @@ def measure_cache_bandwidths():
 
 def find_associativity():
     FUNC_CODE = """
-    void go(unsigned array_size, unsigned stride, unsigned steps)
+    int go(unsigned array_size, unsigned stride, unsigned steps)
     {
       char *ary = (char *) malloc(sizeof(int) * array_size);
 
@@ -140,7 +158,12 @@ def find_associativity():
           p = 0;
       }
 
+      int result = 0;
+      for (unsigned i = 0; i < array_size; ++i)
+          result += ary[i];
+
       free(ary);
+      return result;
     }
     """
     from codepy.jit import extension_from_string
