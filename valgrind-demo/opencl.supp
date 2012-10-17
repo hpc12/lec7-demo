@@ -1,0 +1,59 @@
+{
+  zzz
+  Memcheck:Cond
+  fun:_ZN5Intel6OpenCL13DeviceBackend5Utils9CPUDetectC1Ev
+}
+{
+  zzz
+  Memcheck:Cond
+  fun:_ZN5Intel6OpenCL5Utils9CPUDetect10GetCPUInfoEv
+}
+{
+  zzz
+  Memcheck:Cond
+  fun:*
+  fun:strdup
+  fun:_ZN5Intel6OpenCL5Utils9CPUDetect10GetCPUInfoEv
+}
+{
+  zzz
+  Memcheck:Cond
+  fun:strncpy
+  fun:*
+  fun:_ZN5Intel6OpenCL9CPUDevice9CPUDevice18clDevGetDeviceInfoEjmPvPm
+}
+{
+  zzz
+  Memcheck:Cond
+  fun:strnlen
+  fun:*
+  fun:_ZN5Intel6OpenCL9CPUDevice9CPUDevice18clDevGetDeviceInfoEjmPvPm
+}
+{
+  zzz
+  Memcheck:Free
+  fun:*
+  fun:_ZN5Intel6OpenCL13DeviceBackend15AddImplicitArgs11runOnModuleERN4llvm6ModuleE
+}
+{
+  zzz
+  Memcheck:Cond
+  fun:round_and_return
+}
+{
+  zzz
+  Memcheck:Cond
+  fun:vfprintf
+}
+{
+  zzz
+  Memcheck:Cond
+  fun:*
+  fun:vfprintf
+}
+{
+  zzz
+  Memcheck:Cond
+  fun:strstr
+  fun:create_context_on
+}

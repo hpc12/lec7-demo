@@ -1,0 +1,6 @@
+cl-demo
+tree-sort-wrong
+tree-sort
+tree-sort-critical
+callgrind.out.*
+cachegrind.out.*
