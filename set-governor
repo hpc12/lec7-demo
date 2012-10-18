@@ -1,7 +1,0 @@
-#! /bin/bash
-
-NCPUS=$(grep processor /proc/cpuinfo | wc -l)
-for i in $(seq 0 $((NCPUS-1)) ); do
-  echo $i
-  cpufreq-set -g $1 -c $i
-done
